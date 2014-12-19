@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#DECEA6">
+
+    <ImageView
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/goodfinds"
+            android:background="@drawable/splash_background"
+            android:scaleType="fitCenter"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:layout_alignParentTop="true"
+            />
+
+    <ImageView
+            android:id="@+id/footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/book_footer"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-15dp"
+            />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check_next_book"
+            android:textColor="#996633"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/disclaimer"
+            android:textColor="#996633"
+            android:layout_above="@+id/footer"
+            android:gravity="center"/>
+</RelativeLayout>

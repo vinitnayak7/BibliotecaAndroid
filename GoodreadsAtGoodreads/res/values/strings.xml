@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Goodreads at Goodreads</string>
+    <string name="start_capture_button">Scan ISBN</string>
+    <string name="check_next_book">Check to see if your next favorite
+        book* is here!</string>
+    <string name="disclaimer">Disclaimer: Not liable for books read which
+        are not favorites!</string>
+    <string name="search">Check Catalog</string>
+    <string name="add_book_to_catalog">Scan to add</string>
+    <string name="enter_book_title">Enter Book Title</string>
+    <string name="batch_add">Batch Add</string>
+</resources>
