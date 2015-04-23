@@ -12,7 +12,8 @@ import com.example.Goodreads_at_Goodreads.R;
 public class SplashActivity extends Activity {
 
     // Splash screen timer
-    private static int SPLASH_TIME_OUT = 4000;
+//    private static int SPLASH_TIME_OUT = 4000;
+    private static int SPLASH_TIME_OUT = 400;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

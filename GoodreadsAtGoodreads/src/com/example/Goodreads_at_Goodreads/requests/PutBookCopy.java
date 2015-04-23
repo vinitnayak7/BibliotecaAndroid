@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by vinitnayak on 12/18/14.
  */
-public class HttpBookUploader {
+public class PutBookCopy {
 
     Map<String, String> isbnBookCount = new HashMap<String, String>();
 
