@@ -1,6 +1,7 @@
 package com.example.Goodreads_at_Goodreads.ui;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,21 +10,15 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 import com.example.Goodreads_at_Goodreads.R;
-import com.example.Goodreads_at_Goodreads.models.BookDetails;
-import com.example.Goodreads_at_Goodreads.models.BookMetadata;
-import com.example.Goodreads_at_Goodreads.requests.GetBookMetadata;
 import com.example.Goodreads_at_Goodreads.requests.PutBookCopy;
-import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import com.example.Goodreads_at_Goodreads.ui.fragments.SingleBookFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
 
-    private static final String URL = "http://xisbn.worldcat.org/webservices/xid";
+    private static final String URL = "http://glasswaves.co";
 
     // TODO-XX: When searching is up and running
 //    private EditText mBookTitle;
@@ -81,7 +76,7 @@ public class MainActivity extends Activity {
         mSearchButton.setOnClickListener(searchButtonListener);
 
         mScannedISBNs = new ArrayList<String>();
-        requestSingleMetaData("9780439554930");
+//        displaySingleBook("9780439554930");
     }
 
     @Override
@@ -112,7 +107,8 @@ public class MainActivity extends Activity {
                     if (mWantsToBatchAdd) {
                         startActivityForResult(intent, 0);
                     } else {
-                        requestSingleMetaData(contents);
+//                        requestSingleMetaData(contents);
+                        displaySingleBook(contents);
                     }
                 }
             } else if (resultCode == RESULT_CANCELED) {
@@ -142,22 +138,12 @@ public class MainActivity extends Activity {
         mScannedISBNs.clear();
     }
 
-    private void requestSingleMetaData(String isbn) {
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint(URL)  //call your base url
-                .build();
-
-        GetBookMetadata request = restAdapter.create(GetBookMetadata.class);
-        request.getMetaData(isbn, new Callback<BookMetadata>() {
-            @Override
-            public void success(BookMetadata s, Response response) {
-                Log.d("metatdata response", s.getBook().getAuthor() + " " + s.getBook().getTitle());
-            }
-
-            @Override
-            public void failure(RetrofitError retrofitError) {
-                Log.d("metatdata response", "FAILURE: " + retrofitError.getMessage());
-            }
-        });
+    private void displaySingleBook(String isbn) {
+        SingleBookFragment singleBookFragment =
+                SingleBookFragment.newInstance(isbn);
+        FragmentTransaction transaction =
+                getFragmentManager().beginTransaction();
+        transaction.replace(R.id.book_display_container,
+                singleBookFragment).commit();
     }
 }

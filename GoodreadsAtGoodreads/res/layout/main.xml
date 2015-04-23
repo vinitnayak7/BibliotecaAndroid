@@ -6,7 +6,7 @@
               android:background="#DECEA6">
 
   <EditText
-      android:id="@+id/bookTitle"
+      android:id="@+id/search_book_title"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:hint="@string/enter_book_title"
@@ -14,7 +14,8 @@
 
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
 
     <Button
         android:id="@+id/search"
@@ -50,7 +51,13 @@
           android:thumb="@drawable/apptheme_switch_inner_holo_dark"
           android:track="@drawable/apptheme_switch_track_holo_dark"/>
     </LinearLayout>
-
   </LinearLayout>
+
+
+  <FrameLayout
+      android:id="@+id/book_display_container"
+      android:layout_width="match_parent"
+      android:layout_marginTop="100dp"
+      android:layout_height="wrap_content"/>
 </LinearLayout>
 

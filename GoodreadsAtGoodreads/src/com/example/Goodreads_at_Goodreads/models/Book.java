@@ -7,13 +7,19 @@ import java.util.List;
 /**
  * Created by vinitnayak on 4/22/15.
  */
-public class BookDetails {
+public class Book {
 
     @SerializedName("title")
     private String title;
 
     @SerializedName("author")
     private String author;
+
+    @SerializedName("cover_url")
+    private String coverUrl;
+
+    @SerializedName("description")
+    private String description;
 
     public String getTitle() {
         return title;
@@ -22,4 +28,8 @@ public class BookDetails {
     public String getAuthor() {
         return author;
     }
+
+    public String getCoverUrl() { return coverUrl; }
+
+    public String getDescription() { return description; }
 }
