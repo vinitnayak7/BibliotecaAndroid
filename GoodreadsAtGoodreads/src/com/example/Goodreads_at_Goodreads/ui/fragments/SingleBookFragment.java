@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.Goodreads_at_Goodreads.R;
 import com.example.Goodreads_at_Goodreads.models.Book;
 import com.example.Goodreads_at_Goodreads.requests.GetBookMetadata;
+import com.squareup.picasso.Picasso;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -27,6 +29,7 @@ public class SingleBookFragment extends Fragment {
     private TextView bookTitle;
     private TextView bookAuthor;
     private TextView bookDescription;
+    private ImageView bookImage;
 
 
     public static SingleBookFragment newInstance(String isbn) {
@@ -57,6 +60,7 @@ public class SingleBookFragment extends Fragment {
         bookTitle = (TextView) v.findViewById(R.id.book_title);
         bookAuthor = (TextView) v.findViewById(R.id.book_author);
         bookDescription = (TextView) v.findViewById(R.id.book_description);
+        bookImage = (ImageView) v.findViewById(R.id.book_image);
 
         populateSingleBook();
         return v;
@@ -81,11 +85,11 @@ public class SingleBookFragment extends Fragment {
             }
         });
     }
-
-
+    
     private void displaySingleBook(Book book) {
         bookTitle.setText(book.getTitle());
         bookAuthor.setText(book.getAuthor());
         bookDescription.setText(book.getDescription());
+        Picasso.with(getActivity()).load(book.getCoverUrl()).into(bookImage);
     }
 }
