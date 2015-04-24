@@ -10,11 +10,19 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 import com.example.Goodreads_at_Goodreads.R;
-import com.example.Goodreads_at_Goodreads.requests.PutBookCopy;
+import com.example.Goodreads_at_Goodreads.models.Book;
+import com.example.Goodreads_at_Goodreads.requests.GetBookMetadata;
+import com.example.Goodreads_at_Goodreads.ui.fragments.BookListFragment;
 import com.example.Goodreads_at_Goodreads.ui.fragments.SingleBookFragment;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.Goodreads_at_Goodreads.utils.Constants.BASE_URL;
 
 public class MainActivity extends Activity {
 
@@ -27,8 +35,6 @@ public class MainActivity extends Activity {
     private List<String> mScannedISBNs;
 
     private boolean mWantsToBatchAdd = false;
-
-    private PutBookCopy httpBookUploader = new PutBookCopy();
 
     private View.OnClickListener batchSwitchListener = new
             View.OnClickListener() {
@@ -77,6 +83,7 @@ public class MainActivity extends Activity {
 
         mScannedISBNs = new ArrayList<String>();
 //        displaySingleBook("9780439554930");
+        displayBookList(false);
     }
 
     @Override
@@ -134,13 +141,21 @@ public class MainActivity extends Activity {
      */
     private void addAllToCatalog() {
         // View state add spinner
-        httpBookUploader.sendAll(mScannedISBNs);
         mScannedISBNs.clear();
     }
 
     private void displaySingleBook(String isbn) {
         SingleBookFragment singleBookFragment =
                 SingleBookFragment.newInstance(isbn);
+        FragmentTransaction transaction =
+                getFragmentManager().beginTransaction();
+        transaction.replace(R.id.book_display_container,
+                singleBookFragment).commit();
+    }
+
+    private void displayBookList(boolean upload) {
+        BookListFragment singleBookFragment =
+                BookListFragment.newInstance(upload);
         FragmentTransaction transaction =
                 getFragmentManager().beginTransaction();
         transaction.replace(R.id.book_display_container,
