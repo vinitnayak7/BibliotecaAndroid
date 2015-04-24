@@ -13,31 +13,41 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * Created by vinitnayak on 4/23/15.
- */
 public class BookAdapter extends ArrayAdapter<Book> {
 
-    private final Context context;
 
     public BookAdapter(Context context, int viewLayout,
                        List<Book> bookList) {
         super(context, viewLayout, bookList);
-        this.context = context;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_book_fragment, parent, false);
+        BookListViewHolder viewHolder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.single_book_fragment, parent, false);
+            viewHolder = new BookListViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (BookListViewHolder) convertView.getTag();
+        }
         Book b = getItem(position);
-        ((TextView)convertView.findViewById(R.id.book_title)).setText(b.getTitle());
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.book_image);
-        Picasso.with(getContext()).load(b.getCoverUrl()).into(imageView);
+        viewHolder.titleView.setText(b.getTitle());
+        viewHolder.authorView.setText(b.getAuthor());
+        Picasso.with(getContext()).load(b.getCoverUrl()).into(viewHolder.imageView);
         return convertView;
-//        bookTitle.setText(book.getTitle());
-//        bookAuthor.setText(book.getAuthor());
-//        bookDescription.setText(book.getDescription());
-//        Picasso.with(getActivity()).load(book.getCoverUrl()).into(bookImage);
-//        return super.getView(position, convertView, parent);
+    }
+
+    private class BookListViewHolder {
+
+        private final TextView authorView;
+        private final ImageView imageView;
+        private final TextView titleView;
+
+        private BookListViewHolder(View view) {
+            this.imageView = (ImageView) view.findViewById(R.id.book_image);
+            this.titleView = (TextView) view.findViewById(R.id.book_title);
+            this.authorView = (TextView) view.findViewById(R.id.book_author);
+        }
     }
 }
